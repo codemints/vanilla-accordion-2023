@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap');
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+body * {
+  box-sizing: border-box;
+}
+
+:is(h1, h2, h3, h4, h5, h6) {
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: 700;
+}
+
+:is(p, ol) {
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: 400;
+}
+
+main {
+  max-width: 1140px;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.mw-accordion--group {
+  /****CHANGE VARIABLES HERE****/
+  /* accordion item */
+  --item-top-spacing: 20px;
+  
+  /* accordion title -- normal */
+  --title-font-color: #ec5990;
+  --title-font-size: 24px;
+  --title-text-align: left;
+  --title-text-transform: uppercase;
+  --title-background-color: #404b84;
+  --title-border: 2px solid #afb8e7;
+  --title-border-radius: 5px;
+  --title-padding-x: 20px;
+  --title-padding-y: 10px;
+
+  /* accordion title -- hover */
+  --hover-font-color: #ff7aa8;
+  --hover-background-color: #191d3a;
+  --hover-border-color: #159ce4; /* must be 6-digit hex */
+  --hover-border-width: 4px;
+  --hover-border-opacity: 0.5;
+
+  /* accordion content wrapper */
+  --wrapper-top-spacing: 10px;
+
+  /* accordion content */
+  --content-heading-1-color: #c8ccdf;
+  --content-heading-2-color: #7d85af;
+  --content-font-color: #ffffff;
+  --content-heading-1-size: 21px;
+  --content-heading-2-size: 16px;
+  --content-font-size: 15px;
+  --content-text-align: left;
+  --content-background-color: #2e3c5c;
+  --content-border: 2px solid #afb8e7;
+  --content-border-radius: 5px;
+
+  /***** OPTIONAL -- ONLY IF USING EXPAND/COLLAPSE BUTTONS *****/
+  /* collapse/expand buttons */
+  --button-font-color: #ffffff;
+  --button-font-size: 16px;
+  --button-text-transform: uppercase;
+  --button-background-color: #191d3a;
+  --button-border: 2px solid #afb8e7;
+  --button-border-radius: 5px;
+  --button-hover-font-color: #ff7aa8;
+  --button-hover-background-color: #404b84;
+  --button-hover-border-color: #159ce4;
+  --button-hover-border-width: 3px;
+
+
+  /* base style -- don't edit */
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mw-accordion--controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.mw-accordion--button {
+  color: var(--button-font-color);
+  font-size: var(--button-font-size);
+  text-transform: var(--button-text-transform);
+  background-color: var(--button-background-color);
+  border: var(--button-border);
+  border-radius: var(--button-border-radius);
+  padding-inline: 16px;
+  padding-block: 8px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.mw-accordion--button:hover {
+  color: var(--button-hover-font-color);
+  background-color: var(--button-hover-background-color);
+  border-color: var(--button-hover-border-color);
+}
+
+.mw-accordion--button:focus {
+  outline: none;
+  border-color: transparent;
+  box-shadow: 0 0 0 var(--button-hover-border-width) var(--button-hover-border-color);
+}
+
+.mw-accordion--item:not(:first-of-type) {
+  margin-top: 0;
+}
+
+.mw-accordion--topic {
+  position: relative;
+  font-size: var(--title-font-size);
+  text-align: var(--title-text-align);
+  text-transform: var(--title-text-transform);
+  background-color: var(--title-background-color);
+  border: var(--title-border);
+  border-radius: var(--title-border-radius);
+  cursor: pointer;
+  padding-inline: var(--title-padding-x);
+  padding-block: var(--title-padding-y);
+  width: 100%;
+}
+
+.mw-accordion--topic h3 {
+  color: var(--title-font-color);
+  margin: 0;
+  margin-right: calc(20px + var(--title-padding-x));
+  padding: 0;
+  line-height: 1;
+}
+
+.mw-accordion--topic:is(:focus, :hover, [aria-expanded="true"]) {
+  background-color: var(--hover-background-color);
+  transition: background-color 0.3s ease;
+}
+
+.mw-accordion--topic:is(:focus, :hover, [aria-expanded="true"]) h3 {
+  color: var(--hover-font-color);
+  transition: color 0.3s ease;
+}
+
+.mw-accordion--topic:is(:focus, [aria-expanded="true"]) {
+  outline: none;
+  border-color: transparent;
+  box-shadow: 0 0 0 var(--hover-border-width) var(--hover-color);
+}
+
+.mw-accordion--topic:focus + .mw-accordion--content-wrapper > .mw-accordion--content {
+  /* border-color: transparent; */
+  box-shadow: inset 0 0 0 var(--hover-border-width) var(--hover-border-color);
+}
+
+.mw-accordion--content-wrapper {
+  margin-top: var(--wrapper-top-spacing);
+}
+
+.mw-accordion--content-wrapper:is(:focus, [aria-hidden="false"]) {
+  max-height: var(--content-height);
+  overflow: hidden;
+}
+
+.mw-accordion--content-wrapper[aria-hidden="true"] {
+  max-height: 0;
+  overflow: hidden;
+}
+
+.mw-accordion--content {
+  text-align: var(--content-text-align);
+  background-color: var(--content-background-color);
+  border: var(--content-border);
+  border-radius: var(--content-border-radius);
+  padding: 20px;
+  margin-bottom: var(--item-top-spacing);
+}
+
+.mw-accordion--content :is(h4, h5) {
+  margin: 0;
+  padding: 0;
+}
+
+.mw-accordion--content h4 {
+  color: var(--content-heading-1-color);
+  font-size: var(--content-heading-1-size);
+}
+
+.mw-accordion--content h5 {
+  color: var(--content-heading-2-color);
+  font-size: var(--content-heading-2-size);
+}
+
+.mw-accordion--content :is(p, li) {
+  color: var(--content-font-color);
+  font-size: var(--content-font-size);
+  margin: 0;
+  padding: 0;
+}
+
+.mw-accordion--content :is(p, ul):not(:first-child) {
+  margin-top: calc(var(--content-font-size) * 1.25);
+}
+
+.mw-accordion--icon {
+  position: absolute;
+  background: var(--title-font-color);
+  width: 20px;
+  height: 3px;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.2s ease;
+}
+.mw-accordion--icon:after {
+  content: "";
+  position: absolute;
+  background: var(--title-font-color);
+  width: 3px;
+  height: 20px;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.3s ease-in-out;
+}
+
+[aria-expanded="true"] .mw-accordion--icon {
+  background: var(--hover-font-color);
+}
+
+[aria-expanded="true"] .mw-accordion--icon:after {
+  background: var(--hover-font-color);
+  transform: translateY(-50%) rotate(90deg);
+}
